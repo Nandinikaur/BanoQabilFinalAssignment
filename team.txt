@@ -1,0 +1,10 @@
+Project:
+E-commerce Website
+
+
+Team:
+
+Id:       Name:            Number:           work:
+177939    Nandini-Kaur     03312227778       About-page and Product-Page.
+177381    Tayyaba-Asad     03402560447       Navbar, home-page, Contact-page and Footer.
+177382    Tahoor-Asad      03439324621       SingUp and LogIn.
