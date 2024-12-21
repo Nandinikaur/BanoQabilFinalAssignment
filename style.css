@@ -1,5 +1,5 @@
 /* General Reset */
-body, h1, a {       
+*{       
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -108,7 +108,7 @@ font-size: 24px;
 }
 }
 
-/*about sec start*/
+/about sec start/
 .about-1{
     h1, h2, h3, h4 {
         color: #919091;
@@ -186,10 +186,10 @@ font-size: 24px;
     object-fit: cover;
   }
 
-/*about sec end*/
+/about sec end/
 
 
-/*123*/
+/123/
 .btn {
   background-color: #ff6600;
   color: #fff;
@@ -298,8 +298,8 @@ font-size: 24px;
   }
 }
 
-/*123*/
-/*product sec start*/
+/123/
+/product sec start/
 .product-section h2, .product-section h4 {
   color: #6c757d;
 }
@@ -317,7 +317,7 @@ font-size: 24px;
   font-size: 1rem;
 }
 
-/*product sec end*/
+/product sec end/
 
 
 
