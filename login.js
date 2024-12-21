@@ -1,69 +1,49 @@
-// Fake API - Array of users (email and password)
-let users = [
-    { email: "user1@example.com", password: "password123" },
-    { email: "user2@example.com", password: "password456" },
-    { email: "user3@example.com", password: "password789" },
-    { email: "admin@admin.com", password: "adminpass" },
-    { email: "guest@guest.com", password: "guest123" }
-];
+// User data for verification
+const users = [
+    { username: "testuser", password: "123456" },
+    { username: "john", password: "doe123" },
+  ];
+  
+  // DOM Elements
+  const popupForm = document.getElementById("popupForm");
+  const userForm = document.getElementById("userForm");
+  const message = document.getElementById("message");
+  const usernameInput = document.getElementById("username");
+  const passwordInput = document.getElementById("password");
+  const mainContent = document.getElementById("mainContent");
+  
+  // Show login popup when page loads
+  window.addEventListener("load", () => {
+    popupForm.classList.remove("hidden");
+    mainContent.classList.add("hidden");
+  });
+  
+  // Form submission handler
+  userForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const username = usernameInput.value;
+    const password = passwordInput.value;
 
-// Simulating an API call with a delay using Promise
-function fakeApiCall(email, password) {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            // Check if user exists with the correct email and password
-            const user = users.find(user => user.email === email);
-            if (user) {
-                // If user exists, check if the password matches
-                if (user.password === password) {
-                    resolve({ message: "Login successful!", isNewUser: false });
-                } else {
-                    reject("Invalid password. Please try again.");
-                }
-            } else {
-                // If user does not exist, create a new one (register)
-                users.push({ email, password });
-                resolve({ message: "User registered and logged in successfully!", isNewUser: true });
-            }
-        }, 1000); // Simulated delay (1 second)
-    });
-}
+    console.log(Checking login for username: ${username}, password: ${password});
 
-// Handle the login form submission
-document.getElementById("loginForm").addEventListener("submit", function (event) {
-    event.preventDefault(); // Prevent the default form submission
-
-    // Get the email and password entered by the user
-    const email = document.getElementById("email").value.trim(); // Trim to remove extra spaces
-    const password = document.getElementById("password").value.trim(); // Trim to remove extra spaces
-
-    // Basic validation (if both fields are not empty)
-    if (!email || !password) {
-        alert("Please enter both email and password.");
-        return;
+    const userExists = users.some(
+      (user) => user.username === username && user.password === password
+    );
+  
+    if (userExists) {
+      // Successful login: Hide popup and show main content
+      console.log("Login successful, displaying main content");
+      popupForm.classList.add("hidden");
+      mainContent.classList.remove("hidden");
+    } else {
+      // Invalid login: Show error message
+      console.log("Invalid login credentials");
+      showMessage("Invalid username or password!");
     }
-
-    // Call the fake API and handle the response
-    fakeApiCall(email, password)
-        .then(response => {
-            // If login is successful or user is registered, show success message
-            alert(response.message);
-            if (response.isNewUser) {
-                console.log("New user added:", { email, password });
-            } else {
-                console.log("Existing user logged in:", { email });
-            }
-
-            // Redirect to the home page
-            window.location.href = "home.html"; // Replace "home.html" with the actual path to your home page
-        })
-        .catch(errorMessage => {
-            // If login fails, show error message
-            alert(errorMessage);
-        });
-});
-
-// Redirect back to login page
-function goToLoginPage() {
-    window.location.href = "login.html"; // Replace "login.html" with the actual path to your login page
-}
+  });
+  
+  // Helper function to show error message
+  function showMessage(msg) {
+    message.textContent = msg;
+    message.classList.remove("hidden");
+  }
